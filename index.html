@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <title>API Monitor</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/leaflet.css" rel="stylesheet">
+    <link href="css/MarkerCluster.css" rel="stylesheet">
+    <link href="css/MarkerCluster.Default.css" rel="stylesheet">
+</head>
+
+<body id="main">
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">API Token</span>
+                        </div>
+                        <input type="text" class="form-control" id="inputToken" value="">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Provider</span>
+                        </div>
+                        <select class="custom-select" id="inputProvider">
+                            <option value="0" disabled>Seleziona..</option>
+                            <option value="1" selected>Google</option>
+                            <option value="2">Unwiredlabs</option>
+                            <option value="3">Here</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Operatore</span>
+                        </div>
+                        <select class="custom-select" id="inputOperator">
+                            <option value="0" disabled>Seleziona..</option>
+                            <option value="1" selected>WindTre</option>
+                            <option value="2">Vodafone</option>
+                            <option value="3">TIM</option>
+                            <option value="4">Iliad</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">CellID</span>
+                        </div>
+                        <input type="text" class="form-control" id="inputCellId">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">eNodeB</span>
+                        </div>
+                        <input type="text" class="form-control" id="inputEnodeB">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Settore</span>
+                        </div>
+                        <input type="text" class="form-control" id="inputSector">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-success" id="searchTower">Cerca</button>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-success" id="searchTowerAllSectors">Cerca tutti i settori</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="padding-left:0;padding-right:0;">
+                    <div id="mapid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="background-color:#1c1c1c; padding-top:6px;">
+                    <p style="font-size:14px; color:#8c8c8c" class="text-center txtwhite"> Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- SEZIONE MAPPA -->
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script src="js/map.js"></script>
+    <!-- FINE SEZIONE MAPPA -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
