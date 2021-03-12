@@ -34,8 +34,8 @@
                         <select class="custom-select" id="inputProvider">
                             <option value="0" disabled>Seleziona..</option>
                             <option value="1" selected>Google</option>
-                            <option value="2">Unwiredlabs</option>
-                            <option value="3">Here</option>
+                            <option value="2" disabled>Unwiredlabs</option>
+                            <option value="3" disabled>Here</option>
                         </select>
                     </div>
                 </div>
@@ -78,10 +78,13 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-success" id="searchTower">Cerca | Inserisci CellId oppure eNodeB + Settore</button>
+                    <button type="button" class="btn btn-success" id="searchTower">Cerca cella<br>Inserisci CID o eNb + Settore</button>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-success" id="searchTowerAllSectors">Cerca tutti i settori (NO TIM) / Inserisci eNodeB</button>
+                    <button type="button" class="btn btn-success" id="searchTowerAllSectors">Cerca tutti i settori (NO TIM) <br>Inserisci eNodeB</button>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-success" id="searchOnLteItaly">Cerca BTS su LTEItaly <br>Inserisci eNodeB</button>
                 </div>
             </div>
             <div class="row">

@@ -107,6 +107,12 @@ $(document).ready(function () {
         localStorage.setItem("lastOperator", $("#inputOperator option:selected").val());
     });
 
+    $("#searchOnLteItaly").on('click', function () {
+        if ($('#inputEnodeB').val().length > 0){
+            window.open(("https://lteitaly.it/it/internal/map.php#bts=" + selectedMcc + selectedMnc + "." + $('#inputEnodeB').val()), '_blank');
+        }
+    });
+
     $("#inputProvider").val(localStorage.getItem("lastProvider")); // Carica da localStorage l'ultimo provider 
     $("#inputProvider").trigger('change'); // Triggera il change per caricare da localStorage la key del provider
     $("#inputOperator").val(localStorage.getItem("lastOperator")); // Carica da localStorage l'ultimo operatore scelto

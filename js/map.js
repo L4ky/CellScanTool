@@ -36,7 +36,6 @@ function addMarkerToCluster(lat, lon, cellId) {
             direction: 'auto'
         })
         .openTooltip()
-        .addTo(map)
         .on('click', function () {
             console.log("Click su marker");
         })
