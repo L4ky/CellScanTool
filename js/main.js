@@ -2,6 +2,7 @@ var selectedMcc = 222;
 var selectedMnc = 88;
 
 $(document).ready(function () {
+
     $("#searchTower").on('click', function () {
         clearMapFromMarkers();
         cells = $('#inputCellId').val();
@@ -57,34 +58,67 @@ $(document).ready(function () {
         $('#inputSector').val(parseInt($('#inputCellId').val() % 256));
     });
 
-    /* Imposto MNC al variare dell'operatore da input */
-    $("#inputOperator").on('change', function () {
-        switch ($("#inputOperator option:selected").val()) {
+    /* Salva Token in localstorage */
+    $("#inputToken").on('input', function () {
+        switch ($('#inputProvider option:selected').val()) {
+            /* Google */
             case "1": {
-                selectedMnc = 88;
+                localStorage.setItem("tokenGoogle", $("#inputToken").val());
                 break;
             }
+            /* Unwiredlabs */
             case "2": {
-                selectedMnc = 10;
+                localStorage.setItem("tokenUnwired", $("#inputToken").val());
                 break;
             }
+            /* Here */
             case "3": {
-                selectedMnc = 1;
-                break;
-            }
-            case "4": {
-                selectedMnc = 50;
+                localStorage.setItem("tokenHere", $("#inputToken").val());
                 break;
             }
         }
     });
+
+    /* Leggo token da localStorage */
+    $("#inputProvider").on('change', function () {
+        switch ($("#inputProvider option:selected").val()) {
+            case "1": {
+                $("#inputToken").val(localStorage.getItem("tokenGoogle"));
+                localStorage.setItem("lastProvider", "1");
+                break;
+            }
+            case "2": {
+                $("#inputToken").val(localStorage.getItem("tokenUnwired"));
+                localStorage.setItem("lastProvider", "2");
+                break;
+            }
+            case "3": {
+                $("#inputToken").val(localStorage.getItem("tokenHere"));
+                localStorage.setItem("lastProvider", "3");
+                break;
+            }
+        }
+    });
+
+    /* Imposto MNC al variare dell'operatore da input */
+    /* Salvo in localStorage l'ultimo operatore usato */
+    $("#inputOperator").on('change', function () {
+        selectedMnc = parseInt($("#inputOperator option:selected").val());
+        localStorage.setItem("lastOperator", $("#inputOperator option:selected").val());
+    });
+
+    $("#inputProvider").val(localStorage.getItem("lastProvider")); // Carica da localStorage l'ultimo provider 
+    $("#inputProvider").trigger('change'); // Triggera il change per caricare da localStorage la key del provider
+    $("#inputOperator").val(localStorage.getItem("lastOperator")); // Carica da localStorage l'ultimo operatore scelto
+    $("#inputOperator").trigger('change'); // Triggera il change per caricare da localStorage la key del provider
+
 });
 
 function searchCell(cellId) {
     switch ($('#inputProvider option:selected').val()) {
         case "1": {
             //console.log("Querying google...");
-            queryGoogle(cellId, selectedMcc, selectedMnc);
+            queryGoogle($("#inputToken").val(), cellId, selectedMcc, selectedMnc);
             break;
         }
         case "2": {
@@ -155,8 +189,8 @@ function generateCellDescription(mcc, mnc, cellId) {
             }
             break;
         }
-        /* TIM */
-        case 01: {
+        /* Vodafone */
+        case 10: {
             switch ((cellId % 256)) {
                 case 31:
                 case 32:
@@ -207,8 +241,8 @@ function generateCellDescription(mcc, mnc, cellId) {
             }
             break;
         }
-        /* Vodafone */
-        case 10: {
+        /* TIM */
+        case 1: {
             break;
         }
         /* Iliad */
@@ -263,7 +297,7 @@ function queryUnwiredlabs() {
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: 'https://unwiredlabs.com/v2/process.php&format=json',
         data: {
-            'token': '',
+            'token': $("#inputToken").val(),
             'radio': 'lte',
             'mcc': selectedMcc,
             'mnc': selectedMnc,
@@ -279,7 +313,7 @@ function queryUnwiredlabs() {
 }
 
 
-function queryGoogle(cellId, mcc, mnc) {
+function queryGoogle(token, cellId, mcc, mnc) {
     var jsonQuery = {
         "homeMobileCountryCode": mcc,
         "homeMobileNetworkCode": mnc,
@@ -299,7 +333,7 @@ function queryGoogle(cellId, mcc, mnc) {
 
     $.ajax({
         type: 'POST',
-        url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=',
+        url: 'https://www.googleapis.com/geolocation/v1/geolocate?key=' + token,
         contentType: 'Content-Type: application/json',
         dataType: 'json',
         data: JSON.stringify(jsonQuery),
