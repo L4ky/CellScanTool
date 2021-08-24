@@ -18,97 +18,87 @@
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">API Token</span>
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky text-center">
+                        <h1>Cell Scan Tool</h1>
+                        <p>Questo semplice tool permette di localizzare i settori di una BTS. E' sufficiente inserire i dati richiesti e far partire la ricerca preferita.
+                            <br>Tutte le operazioni vengono effettuate client-side. 
+                            <br>Nessun dato viene registrato.</p>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">API Token</span>
+                            </div>
+                            <input type="text" class="form-control" id="inputToken" value="">
                         </div>
-                        <input type="text" class="form-control" id="inputToken" value="">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Provider</span>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Provider</span>
+                            </div>
+                            <select class="custom-select" id="inputProvider">
+                                <option value="0" disabled>Seleziona..</option>
+                                <option value="1" selected>Google</option>
+                                <option value="2" disabled>Unwiredlabs</option>
+                                <option value="3">Here</option>
+                            </select>
                         </div>
-                        <select class="custom-select" id="inputProvider">
-                            <option value="0" disabled>Seleziona..</option>
-                            <option value="1" selected>Google</option>
-                            <option value="2" disabled>Unwiredlabs</option>
-                            <option value="3" disabled>Here</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Operatore</span>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Operatore</span>
+                            </div>
+                            <select class="custom-select" id="inputOperator">
+                                <option value="0" disabled>Seleziona..</option>
+                                <option value="88" selected>WindTre</option>
+                                <option value="10">Vodafone</option>
+                                <option value="1">TIM</option>
+                                <option value="50">Iliad</option>
+                            </select>
                         </div>
-                        <select class="custom-select" id="inputOperator">
-                            <option value="0" disabled>Seleziona..</option>
-                            <option value="88" selected>WindTre</option>
-                            <option value="10">Vodafone</option>
-                            <option value="1">TIM</option>
-                            <option value="50">Iliad</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">CellID</span>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">CellID</span>
+                            </div>
+                            <input type="text" class="form-control" id="inputCellId">
                         </div>
-                        <input type="text" class="form-control" id="inputCellId">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">eNodeB</span>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">eNodeB</span>
+                            </div>
+                            <input type="text" class="form-control" id="inputEnodeB">
                         </div>
-                        <input type="text" class="form-control" id="inputEnodeB">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Settore</span>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Settore</span>
+                            </div>
+                            <input type="text" class="form-control" id="inputSector">
                         </div>
-                        <input type="text" class="form-control" id="inputSector">
+                        <button type="button" class="btn btn-success mb-2" id="searchTower">Cerca cella<br>Inserisci CID o
+                            eNb + Settore</button>
+                        <button type="button" class="btn btn-success mb-2" id="searchTowerAllSectors">Cerca tutti i settori
+                            (NO TIM) <br>Inserisci eNodeB</button>
+                        <button type="button" class="btn btn-success mb-2" id="searchOnLteItaly">Cerca BTS su LTEItaly
+                            <br>Inserisci eNodeB</button>
                     </div>
-                </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-success" id="searchTower">Cerca cella<br>Inserisci CID o eNb + Settore</button>
-                </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-success" id="searchTowerAllSectors">Cerca tutti i settori (NO TIM) <br>Inserisci eNodeB</button>
-                </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-success" id="searchOnLteItaly">Cerca BTS su LTEItaly <br>Inserisci eNodeB</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12" style="padding-left:0;padding-right:0;">
+
+                    <div class="row" id="footer">
+                        <div class="col-md-12" style="background-color:#1c1c1c; padding-top:6px;">
+                            <p style="font-size:14px; color:#8c8c8c" class="text-center txtwhite"> Copyright ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                            </p>
+                        </div>
+                    </div>
+
+                </nav>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-0">
                     <div id="mapid">
                     </div>
-                </div>
+                </main>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12" style="background-color:#1c1c1c; padding-top:6px;">
-                    <p style="font-size:14px; color:#8c8c8c" class="text-center txtwhite"> Copyright ©
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
