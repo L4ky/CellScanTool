@@ -23,11 +23,12 @@ $(document).ready(function () {
         baseCellId = enodeb * 256;
         switch (selectedMnc) {
             case 88: {
-                cells = [baseCellId, baseCellId + 1, baseCellId + 2, baseCellId + 3, baseCellId + 6, baseCellId + 7, baseCellId + 8, baseCellId + 9, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 15, baseCellId + 18, baseCellId + 19, baseCellId + 20, baseCellId + 21];
+                cells = [baseCellId, baseCellId + 1, baseCellId + 2, baseCellId + 3, baseCellId + 6, baseCellId + 7, baseCellId + 8, baseCellId + 9, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 15, baseCellId + 18, baseCellId + 19, baseCellId + 20, baseCellId + 21, baseCellId + 24, baseCellId + 25, baseCellId + 26, baseCellId + 27];
                 break;
             }
             case 1: { // TIM TO DO
-                cells = [baseCellId + 1, baseCellId + 2, baseCellId + 3, baseCellId + 6, baseCellId + 7, baseCellId + 8, baseCellId + 9, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 15, baseCellId + 18, baseCellId + 19, baseCellId + 20, baseCellId + 21];
+                cells = [baseCellId, baseCellId + 1, baseCellId + 2, baseCellId + 3, baseCellId + 6, baseCellId + 7, baseCellId + 8, baseCellId + 9, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 15, baseCellId + 36, baseCellId + 37, baseCellId + 38, baseCellId + 39, baseCellId + 250, baseCellId + 251, baseCellId + 252, baseCellId + 253,
+                         baseCellId + 21, baseCellId + 22, baseCellId + 23, baseCellId + 24, baseCellId + 31, baseCellId + 32, baseCellId + 33, baseCellId + 34, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 64];
                 break;
             }
             case 10: {
@@ -178,6 +179,13 @@ function generateCellDescription(mcc, mnc, cellId) {
                     desc = "B1 ";
                     break;
                 }
+                case 24:
+                case 25:
+                case 26:
+                case 27: {
+                    desc = "B38 ";
+                    break;
+                }
             }
             switch ((cellId - (parseInt(cellId / 256) * 256)) % 6) {
                 case 0: {
@@ -253,6 +261,56 @@ function generateCellDescription(mcc, mnc, cellId) {
         }
         /* TIM */
         case 1: {
+            switch ((cellId % 256)) {
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 21:
+                case 22:
+                case 23:
+                case 24: {
+                    desc = "B7 ";
+                    break;
+                }
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+                case 250:
+                case 251:
+                case 252:
+                case 253:
+                case 31:
+                case 32:
+                case 33:
+                case 34: {
+                    desc = "B1 ";
+                    break;
+                }
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 41:
+                case 42:
+                case 43:
+                case 44: {
+                    desc = "B3 ";
+                    break;
+                }
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 61:
+                case 62:
+                case 63:
+                case 64: {
+                    desc = "B20 ";
+                    break;
+                }
+            }
             break;
         }
         /* Iliad */
