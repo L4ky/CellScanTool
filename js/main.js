@@ -131,6 +131,10 @@ function searchCell(cellId) {
             console.log("Unwired");
             break;
         }
+        case "3": {
+            queryHere($("#inputToken").val(), cellId, selectedMcc, selectedMnc);
+            break;
+        }
         default:
             console.log("Scemo");
     }
@@ -318,6 +322,47 @@ function queryUnwiredlabs() {
     });
 }
 
+function queryHere(token, cellId, mcc, mnc) {
+    var jsonQuery = 
+        {
+            "lte": [{
+                "mcc": mcc,
+                "mnc": mnc,
+                "cid": cellId/*,
+                "nmr": [
+                { "earfcn": 6300, "pci": 237 },
+                { "earfcn": 6300, "pci": 442 }
+                ]*/
+                }
+            ]
+        };
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://pos.ls.hereapi.com/positioning/v1/locate?apiKey=' + token,
+        contentType: 'Content-Type: application/json',
+        /*dataType: 'json',*/
+        data: {
+            "lte": [{
+            "mcc": 262,
+            "mnc": 2,
+            "cid": 2898945,
+            "nmr": [
+              { "earfcn": 6300, "pci": 237 },
+              { "earfcn": 6300, "pci": 442 }
+            ]
+            }]
+          },
+        success: function (msg) {
+            console.log("Risultato Here", msg);
+            addMarkerToCluster(msg.location.lat, msg.location.lng, cellId);
+            showMarkerCluster();
+        },
+        error: function (err) {
+            console.log("Errore: ", err);
+        }
+    });
+}
 
 function queryGoogle(token, cellId, mcc, mnc) {
     var jsonQuery = {
