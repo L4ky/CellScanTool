@@ -36,7 +36,7 @@ $(document).ready(function () {
                 break;
             }
             case 50: {
-                cells = [baseCellId + 21, baseCellId + 22, baseCellId + 23, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 81, baseCellId + 82, baseCellId + 83];
+                cells = [baseCellId + 21, baseCellId + 22, baseCellId + 23, baseCellId + 24, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 64, baseCellId + 81, baseCellId + 82, baseCellId + 83, baseCellId + 84];
                 break;
             }
         }
@@ -318,19 +318,29 @@ function generateCellDescription(mcc, mnc, cellId) {
             switch ((cellId % 256)) {
                 case 21:
                 case 22:
-                case 23: {
+                case 23:
+                case 24: {
                     desc = "B1 ";
+                    break;
+                }
+                case 41:
+                case 42:
+                case 43:
+                case 44: {
+                    desc = "B7 Temp";
                     break;
                 }
                 case 81:
                 case 82:
-                case 83: {
+                case 83:
+                case 84: {
                     desc = "B3 ";
                     break;
                 }
                 case 61:
                 case 62:
-                case 63: {
+                case 63:
+                case 64: {
                     desc = "B7 ";
                     break;
                 }
@@ -346,6 +356,10 @@ function generateCellDescription(mcc, mnc, cellId) {
                 }
                 case 3: {
                     desc += "S3 ";
+                    break;
+                }
+                case 4: {
+                    desc += "S4 ";
                     break;
                 }
             }
