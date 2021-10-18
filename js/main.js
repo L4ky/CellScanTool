@@ -130,6 +130,7 @@ function searchCell(cellId) {
         }
         case "2": {
             console.log("Unwired");
+            queryUnwiredlabs($("#inputToken").val(), cellId, selectedMcc, selectedMnc);
             break;
         }
         case "3": {
@@ -372,24 +373,30 @@ function generateCellDescription(mcc, mnc, cellId) {
 
 
 
-function queryUnwiredlabs() {
+function queryUnwiredlabs(token, cellId, mcc, mnc) {
     $.ajax({
-        type: 'POST',
-        // make sure you respect the same origin policy with this url:
-        // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: 'https://unwiredlabs.com/v2/process.php&format=json',
+        type: 'GET',
+        url: 'resources/proxy_unwired.php',
         data: {
-            'token': $("#inputToken").val(),
+            'url': 'https://eu1.unwiredlabs.com/v2/process.php',
+            'token': token,
             'radio': 'lte',
-            'mcc': selectedMcc,
-            'mnc': selectedMnc,
-            'cells': {
-                "lac": 1,
-                "cid": 123456
-            }
+            'mcc': mcc,
+            'mnc': mnc,
+            "cid": cellId
         },
         success: function (msg) {
-            alert('wow' + msg);
+            res = JSON.parse(msg);
+            if(res.status == "ok"){
+                addMarkerToCluster(res.lat, res.lon, cellId);
+                showMarkerCluster();
+            }
+            else{
+                console.log("CellID " + cellid + " non trovato.");
+            }
+        },
+        error: function (err) {
+            console.log("Errore: ", err);
         }
     });
 }
