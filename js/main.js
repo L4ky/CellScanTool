@@ -32,11 +32,11 @@ $(document).ready(function () {
                 break;
             }
             case 10: {
-                cells = [baseCellId + 11, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 31, baseCellId + 32, baseCellId + 33, baseCellId + 34, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 51, baseCellId + 52, baseCellId + 53, baseCellId + 54];
+                cells = [baseCellId + 11, baseCellId + 12, baseCellId + 13, baseCellId + 14, baseCellId + 31, baseCellId + 32, baseCellId + 33, baseCellId + 34, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 51, baseCellId + 52, baseCellId + 53, baseCellId + 54, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 64, baseCellId + 91, baseCellId + 92, baseCellId + 93, baseCellId + 94];
                 break;
             }
             case 50: {
-                cells = [baseCellId + 21, baseCellId + 22, baseCellId + 23, baseCellId + 24, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 64, baseCellId + 81, baseCellId + 82, baseCellId + 83, baseCellId + 84];
+                cells = [baseCellId + 21, baseCellId + 22, baseCellId + 23, baseCellId + 24, baseCellId + 41, baseCellId + 42, baseCellId + 43, baseCellId + 44, baseCellId + 61, baseCellId + 62, baseCellId + 63, baseCellId + 64, baseCellId + 71, baseCellId + 72, baseCellId + 73, baseCellId + 74 , baseCellId + 81, baseCellId + 82, baseCellId + 83, baseCellId + 84];
                 break;
             }
         }
@@ -239,6 +239,20 @@ function generateCellDescription(mcc, mnc, cellId) {
                     desc = "B1 ";
                     break;
                 }
+                case 61:
+                case 62:
+                case 63:
+                case 64: {
+                    desc = "B28 ";
+                    break;
+                }
+                case 91:
+                case 92:
+                case 93:
+                case 94: {
+                    desc = "B8 ";
+                    break;
+                }
             }
             switch ((cellId - (parseInt(cellId / 256) * 256)) % 10) {
                 case 1: {
@@ -328,7 +342,7 @@ function generateCellDescription(mcc, mnc, cellId) {
                 case 42:
                 case 43:
                 case 44: {
-                    desc = "B7 Temp";
+                    desc = "<del>B7 Temp</del>";
                     break;
                 }
                 case 81:
@@ -343,6 +357,13 @@ function generateCellDescription(mcc, mnc, cellId) {
                 case 63:
                 case 64: {
                     desc = "B7 ";
+                    break;
+                }
+                case 71:
+                case 72:
+                case 73:
+                case 74: {
+                    desc = "B28 ";
                     break;
                 }
             }
